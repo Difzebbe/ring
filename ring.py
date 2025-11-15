@@ -1,4 +1,10 @@
-from picamera2 import Picamera2, Preview
+"""
+Filen ursprungliga innehåll kommenterad ut nedan.
+Om du vill återskapa originalfunktionen, ta bort kommentaren.
+
+Originalkod:
+
+from picamera2 import Picamera2
 from libcamera import Transform
 import time
 import numpy as np
@@ -55,3 +61,24 @@ except KeyboardInterrupt:
 
 finally:
     picam2.stop()
+
+"""
+
+import subprocess
+import sys
+
+def main():
+    cmd = ["libcamera-still", "-o", "test.jpg"]
+    try:
+        print("Kör:", " ".join(cmd))
+        subprocess.run(cmd, check=True)
+        print("Bild sparad som test.jpg")
+    except FileNotFoundError:
+        print("Fel: 'libcamera-still' hittades inte. Kör detta på en enhet med libcamera installerad.")
+        sys.exit(2)
+    except subprocess.CalledProcessError as e:
+        print("Kommandot misslyckades med returkod:", e.returncode)
+        sys.exit(e.returncode)
+
+if __name__ == "__main__":
+    main()
