@@ -6,6 +6,19 @@ services:
     container_name: ring-app-container
     ports:
       - "5000:5000"
+
+    # Kameran + GPU + libcamera-behörigheter
     devices:
       - /dev/video0:/dev/video0
+      - /dev/vchiq:/dev/vchiq
+      - /dev/vcsm:/dev/vcsm
+      - /dev/dma_heap:/dev/dma_heap
+
+    # Krävs oftast för att libcamera ska kunna köra i containers
+    privileged: true
+
+    environment:
+      # Ger mer info om libcamera vid fel (valfritt)
+      LIBCAMERA_LOG_LEVELS: "*:INFO"
+
     restart: always
