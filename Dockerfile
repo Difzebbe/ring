@@ -11,6 +11,9 @@ COPY . /app
 # If you don't have a requirements.txt, this step will be skipped
 RUN pip install --no-cache-dir -r requirements.txt || true
 
+# Install picamera2 library
+RUN pip install picamera2
+
 # Make port 5000 available to the world outside this container
 EXPOSE 5000
 
